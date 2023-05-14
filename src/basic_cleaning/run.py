@@ -23,6 +23,10 @@ def clean_dataset(df, min_price, max_price):
     # Convert last_review to datetime
     df['last_review'] = pd.to_datetime(df['last_review'])
 
+    # Drop rows outside of the specified geolocation
+    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+    df = df[idx].copy()
+
     return df
 
 
